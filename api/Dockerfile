@@ -9,16 +9,16 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Копирование requirements
-COPY api/requirements.txt .
+COPY requirements.txt .
 
 # Установка Python зависимостей
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Копирование кода API
-COPY api/ .
+COPY . .
 
 # Копирование общих модулей
-COPY database/ ./database/
+COPY ../database/ ./database/
 
 # Создание директории для загрузок
 RUN mkdir -p /app/uploads
