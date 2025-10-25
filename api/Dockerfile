@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Копирование общих модулей
-COPY ../database/ ./database/
+COPY database/ ./database/
 
 # Создание директории для загрузок
 RUN mkdir -p /app/uploads
