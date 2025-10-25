@@ -17,6 +17,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копирование всего проекта
 COPY .. .
 
+
 # Создание директории для загрузок
 RUN mkdir -p /app/uploads
 
