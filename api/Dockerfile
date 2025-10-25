@@ -8,23 +8,20 @@ RUN apt-get update && apt-get install -y \
     postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
-# Копирование requirements из api/
-COPY api/requirements.txt .
+# Копирование requirements
+COPY requirements.txt .
 
 # Установка Python зависимостей
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копирование всего проекта
+# Копирование кода API
 COPY . .
 
 # Создание директории для загрузок
 RUN mkdir -p /app/uploads
 
-# Добавляем /app в PYTHONPATH чтобы импорты работали
-ENV PYTHONPATH=/app
-
 # Expose порт
 EXPOSE 8000
 
 # Команда запуска
-CMD ["python", "-m", "uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

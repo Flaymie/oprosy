@@ -1,0 +1,10 @@
+# Bot dependencies
+aiogram==3.13.1
+aiohttp==3.10.5
+
+# Database
+asyncpg==0.29.0
+SQLAlchemy==2.0.35
+
+# Utilities
+python-dotenv==1.0.1

@@ -12,9 +12,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import logging
 
-from api.config import settings
-from api.middlewares.rate_limit import RateLimitMiddleware
-from api.routes import auth, quizzes, responses, users, analytics, files, links, settings as settings_route
+from config import settings
+from middlewares.rate_limit import RateLimitMiddleware
+from routes import auth, quizzes, responses, users, analytics, files, links, settings as settings_route
 
 # Настройка логирования
 logging.basicConfig(
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     logger.info(f"Starting API server on {settings.API_HOST}:{settings.API_PORT}")
     
     uvicorn.run(
-        "api.main:app",
+        "main:app",
         host=settings.API_HOST,
         port=settings.API_PORT,
         reload=True,

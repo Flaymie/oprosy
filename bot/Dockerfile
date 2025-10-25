@@ -8,17 +8,17 @@ RUN apt-get update && apt-get install -y \
     postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
-# Копирование requirements
-COPY requirements.txt .
+# Копирование requirements из bot/
+COPY bot/requirements.txt .
 
 # Установка Python зависимостей
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копирование кода
+# Копирование всего проекта
 COPY . .
 
-# Создание директории для загрузок
-RUN mkdir -p /app/uploads
+# Добавляем /app в PYTHONPATH
+ENV PYTHONPATH=/app
 
-# Команда запуска (переопределяется в docker-compose)
-CMD ["python", "-m", "bot.main"]
+# Команда запуска
+CMD ["python", "bot/main.py"]
