@@ -14,14 +14,17 @@ COPY requirements.txt .
 # Установка Python зависимостей
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копирование кода
+# Копирование всего проекта
 COPY . .
 
 # Создание директории для загрузок
 RUN mkdir -p /app/uploads
 
+# Добавляем /app в PYTHONPATH чтобы импорты работали
+ENV PYTHONPATH=/app
+
 # Expose порт
 EXPOSE 8000
 
-# Команда запуска (переопределяется в docker-compose)
+# Команда запуска
 CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
