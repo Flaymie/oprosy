@@ -1,0 +1,91 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: oprosy_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - oprosy_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # API Service (FastAPI)
+  api:
+    build:
+      context: .
+      dockerfile: ./api/Dockerfile
+    container_name: oprosy_api
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./api:/app/api
+      - ./database:/app/database
+      - ./uploads:/app/uploads
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - oprosy_network
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Telegram Bot (aiogram)
+  bot:
+    build:
+      context: .
+      dockerfile: ./bot/Dockerfile
+    container_name: oprosy_bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./bot:/app/bot
+      - ./uploads:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - oprosy_network
+    command: python -m bot.main
+
+  # React WebApp (Development)
+  webapp:
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile.dev
+    container_name: oprosy_webapp
+    restart: unless-stopped
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    volumes:
+      - ./webapp:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - oprosy_network
+    command: npm start
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  oprosy_network:
+    driver: bridge

@@ -1,0 +1,10 @@
+version: "2"
+authtoken: YOUR_NGROK_TOKEN_HERE
+
+tunnels:
+  api:
+    proto: http
+    addr: 8000
+  webapp:
+    proto: http
+    addr: 3000
