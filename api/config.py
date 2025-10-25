@@ -2,17 +2,18 @@
 Конфигурация API
 """
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+# Загружаем .env из директории api/
+env_path = Path(__file__).parent / '.env'
+load_dotenv(dotenv_path=env_path)
 
 
 class Settings:
     """Настройки API"""
     
     # API
-    API_HOST: str = os.getenv("API_HOST", "0.0.0.0")
-    API_PORT: int = int(os.getenv("API_PORT", "8000"))
     API_SECRET_KEY: str = os.getenv("API_SECRET_KEY", "your-secret-key-here")
     
     # Database
@@ -21,9 +22,6 @@ class Settings:
     DB_NAME: str = os.getenv("DB_NAME", "oprosy_db")
     DB_USER: str = os.getenv("DB_USER", "oprosy_user")
     DB_PASSWORD: str = os.getenv("DB_PASSWORD", "")
-    
-    # Bot
-    BOT_TOKEN: str = os.getenv("BOT_TOKEN", "")
     
     # File Upload
     UPLOAD_DIR: str = os.getenv("UPLOAD_DIR", "./uploads")

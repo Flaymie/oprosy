@@ -2,11 +2,14 @@
 Конфигурация бота
 """
 import os
+from pathlib import Path
 from dataclasses import dataclass
 from urllib.parse import quote_plus
 from dotenv import load_dotenv
 
-load_dotenv()
+# Загружаем .env из директории bot/
+env_path = Path(__file__).parent / '.env'
+load_dotenv(dotenv_path=env_path)
 
 
 @dataclass
@@ -61,3 +64,9 @@ def load_config() -> Config:
         ),
         webapp_url=os.getenv("WEBAPP_URL", "http://localhost:3000")
     )
+
+
+# Добавляем API_HOST для будущего использования
+def get_api_host() -> str:
+    """Возвращает URL API"""
+    return os.getenv("API_HOST", "http://localhost:8000")
