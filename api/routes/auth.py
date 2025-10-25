@@ -8,9 +8,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from api.database import get_db
-from api.schemas.auth import InitDataValidation, AuthResponse
-from api.utils.auth import validate_init_data
+from database import get_db
+from schemas.auth import InitDataValidation, AuthResponse
+from utils.auth import validate_init_data
 from database.models import User
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])

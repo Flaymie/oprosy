@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import sessionmaker, Session
 
-from api.config import settings
+from config import settings
 
 # Синхронный движок (для обычных операций)
 engine = create_engine(settings.database_url, echo=False, pool_pre_ping=True)

@@ -8,11 +8,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from api.database import get_db
-from api.dependencies import get_current_admin
-from api.schemas.user import UserResponse, UserListResponse
+from database import get_db
+from dependencies import get_current_admin
+from schemas.user import UserResponse, UserListResponse
 from database.models import User
-from api.config import settings
+from config import settings
 import os
 
 router = APIRouter(prefix="/users", tags=["Users"])

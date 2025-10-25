@@ -9,8 +9,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 
-from api.database import get_db
-from api.dependencies import get_current_admin
+from database import get_db
+from dependencies import get_current_admin
 
 router = APIRouter(prefix="/settings", tags=["Settings"])
 

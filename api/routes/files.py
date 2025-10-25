@@ -11,9 +11,9 @@ from sqlalchemy.orm import Session
 import os
 import uuid
 
-from api.database import get_db
-from api.dependencies import get_current_user
-from api.config import settings
+from database import get_db
+from dependencies import get_current_user
+from config import settings
 from database.models import User, File
 
 router = APIRouter(prefix="/files", tags=["Files"])

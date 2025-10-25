@@ -9,9 +9,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
-from api.database import get_db
-from api.dependencies import get_current_user, get_current_admin
-from api.schemas.response import ResponseCreate, ResponseResponse, ResponseListResponse, ResponseWithUserResponse, ResponseSubmit, ResponseSubmitResponse
+from database import get_db
+from dependencies import get_current_user, get_current_admin
+from schemas.response import ResponseCreate, ResponseResponse, ResponseListResponse, ResponseWithUserResponse, ResponseSubmit, ResponseSubmitResponse
 from database.models import User, Quiz, Response
 
 router = APIRouter(prefix="/responses", tags=["Responses"])

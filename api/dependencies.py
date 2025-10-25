@@ -9,8 +9,8 @@ from fastapi import Header, HTTPException, Depends
 from sqlalchemy.orm import Session
 from typing import Optional
 
-from api.database import get_db
-from api.utils.auth import validate_init_data
+from database import get_db
+from utils.auth import validate_init_data
 from database.models import User
 
 

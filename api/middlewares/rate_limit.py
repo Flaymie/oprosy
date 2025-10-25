@@ -11,7 +11,7 @@ from collections import defaultdict
 from time import time
 from typing import Dict, Tuple
 
-from api.config import settings
+from config import settings
 
 
 class RateLimitMiddleware(BaseHTTPMiddleware):

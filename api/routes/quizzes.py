@@ -9,9 +9,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 
-from api.database import get_db
-from api.dependencies import get_current_user, get_current_admin
-from api.schemas.quiz import QuizCreate, QuizUpdate, QuizResponse, QuizListResponse, QuizStatsResponse
+from database import get_db
+from dependencies import get_current_user, get_current_admin
+from schemas.quiz import QuizCreate, QuizUpdate, QuizResponse, QuizListResponse, QuizStatsResponse
 from database.models import User, Quiz, Response
 
 router = APIRouter(prefix="/quizzes", tags=["Quizzes"])
