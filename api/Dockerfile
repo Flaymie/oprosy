@@ -17,9 +17,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копирование кода API
 COPY . .
 
-# Копирование общих модулей
-COPY database/ ./database/
-
 # Создание директории для загрузок
 RUN mkdir -p /app/uploads
 
