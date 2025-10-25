@@ -11,7 +11,7 @@ from urllib.parse import parse_qsl
 from typing import Dict, Optional
 import json
 
-from api.config import settings
+from config import settings
 
 
 def validate_init_data(init_data: str) -> Optional[Dict]:
